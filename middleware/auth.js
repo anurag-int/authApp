@@ -11,12 +11,12 @@ const auth = (req, res, next) => {
         
         //extarct JWT Token
         const token = req.body.token;
-        if(!token)
+        if(!token || token === undefined)
         {
             return res.status(401).json({
                 success : false,
                 message : "Token Missing"
-            })
+            })  
         }
 
         //verify the token
@@ -26,7 +26,8 @@ const auth = (req, res, next) => {
 
             req.user = payload;
             next();  
-        }catch(err){
+        }
+        catch(err){
             return res.status(401).json({
                 success : false,
                 message : "token is invalid"
@@ -42,7 +43,7 @@ const auth = (req, res, next) => {
     }
 }
 
-const isAdmin = ()=>{
+const isAdmin = (req, res, next)=>{
     try{
         if(req.user.role !== "Admin")
         {

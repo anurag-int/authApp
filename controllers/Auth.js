@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 require("dotenv").config();
 
 
+
 // signup function
 exports.signup = async (req, res)=>{
     try{
